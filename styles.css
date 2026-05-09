@@ -173,10 +173,14 @@ p:last-child { margin-bottom: 0; }
     display: flex;
     align-items: center;
     gap: 14px;
+    max-height: 64px;
+    overflow: hidden;
 }
 .brand__mark {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
+    max-width: 52px;
+    max-height: 52px;
     object-fit: contain;
     filter: drop-shadow(0 2px 8px rgba(201, 161, 74, 0.25));
     flex-shrink: 0;
@@ -184,12 +188,16 @@ p:last-child { margin-bottom: 0; }
 .brand__wordmark {
     height: 52px;
     width: auto;
+    max-height: 52px;
+    max-width: 200px;
     object-fit: contain;
+    flex-shrink: 0;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 @media (max-width: 560px) {
-    .brand__wordmark { height: 40px; }
-    .brand__mark { width: 46px; height: 46px; }
+    .brand { max-height: 48px; gap: 10px; }
+    .brand__mark { width: 40px; height: 40px; max-width: 40px; max-height: 40px; }
+    .brand__wordmark { height: 38px; max-height: 38px; max-width: 140px; }
 }
 
 .site-nav {
