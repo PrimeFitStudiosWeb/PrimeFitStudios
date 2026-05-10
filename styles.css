@@ -72,10 +72,12 @@ body {
     animation: preloaderLogoInOut 3.6s var(--easing) 0.2s forwards;
 }
 @keyframes preloaderLogoInOut {
-    0%   { opacity: 0; transform: scale(0.92); }
-    35%  { opacity: 1; transform: scale(1); }
-    65%  { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.04); }
+    0%   { opacity: 0;    transform: scale(0.92); }
+    15%  { opacity: 0.04; transform: scale(0.94); }
+    30%  { opacity: 0.18; transform: scale(0.97); }
+    50%  { opacity: 1;    transform: scale(1); }
+    65%  { opacity: 1;    transform: scale(1); }
+    100% { opacity: 0;    transform: scale(1.04); }
 }
 @keyframes preloaderOut {
     0%   { opacity: 1; }
