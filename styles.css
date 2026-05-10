@@ -416,6 +416,7 @@ p:last-child { margin-bottom: 0; }
     .site-nav--inline { display: none; }
     .nav-toggle { display: flex; }
     .site-header__cta .btn:not(.nav-toggle) { display: none; }
+    .site-header__cta { margin-left: auto; } /* push hamburger to the far right */
     .mobile-nav,
     .mobile-nav__backdrop { display: block; }
 }
