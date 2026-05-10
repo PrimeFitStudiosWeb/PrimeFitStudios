@@ -28,19 +28,26 @@
 
     // Mobile nav
     const toggle = document.getElementById('navToggle');
-    const nav = document.getElementById('siteNav');
-    if (toggle && nav) {
+    const drawer = document.getElementById('mobileNav');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    const setNav = (open) => {
+        if (!drawer) return;
+        drawer.classList.toggle('is-open', open);
+        if (backdrop) backdrop.classList.toggle('is-open', open);
+        document.body.classList.toggle('nav-open', open);
+        if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    };
+    if (toggle && drawer) {
         toggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('is-open');
-            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            document.body.style.overflow = open ? 'hidden' : '';
+            setNav(!drawer.classList.contains('is-open'));
         });
-        nav.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                nav.classList.remove('is-open');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
+        drawer.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => setNav(false));
+        });
+        if (backdrop) backdrop.addEventListener('click', () => setNav(false));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setNav(false);
         });
     }
 
