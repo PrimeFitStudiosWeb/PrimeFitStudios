@@ -10,9 +10,9 @@
             document.body.classList.add('is-revealed');
             preloader.remove();
         } else {
-            // Total intro: 0.2s delay + 1.6s logo in + 1.0s hold + 1.2s fade out = 4.0s
-            const REVEAL_AT = 2800;   // matches start of preloader fade-out
-            const REMOVE_AT = 4050;   // just after preloader fade-out completes
+            // Total intro: 0.2s delay + 3.6s logo in/hold/out + 1.2s overlay fade = 5.0s
+            const REVEAL_AT = 3800;   // matches start of preloader fade-out
+            const REMOVE_AT = 5050;   // just after preloader fade-out completes
             window.setTimeout(() => {
                 document.body.classList.remove('is-loading');
                 document.body.classList.add('is-revealed');

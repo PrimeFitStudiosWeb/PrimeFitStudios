@@ -61,7 +61,7 @@ body {
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    animation: preloaderOut 1.2s var(--easing) 2.8s forwards;
+    animation: preloaderOut 1.2s var(--easing) 3.8s forwards;
 }
 .preloader__logo {
     width: clamp(180px, 22vw, 300px);
@@ -69,11 +69,13 @@ body {
     opacity: 0;
     transform: scale(0.92);
     filter: drop-shadow(0 0 40px rgba(201, 161, 74, 0.35));
-    animation: preloaderLogoIn 1.6s var(--easing) 0.2s forwards;
+    animation: preloaderLogoInOut 3.6s var(--easing) 0.2s forwards;
 }
-@keyframes preloaderLogoIn {
-    0%   { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
+@keyframes preloaderLogoInOut {
+    0%   { opacity: 0; transform: scale(0.92); }
+    35%  { opacity: 1; transform: scale(1); }
+    65%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.04); }
 }
 @keyframes preloaderOut {
     0%   { opacity: 1; }
