@@ -1091,3 +1091,173 @@ a.contact__value:hover { color: var(--gold); }
     }
     html { scroll-behavior: auto; }
 }
+
+/* ==========================================================================
+   RESPONSIVE REFINEMENTS
+   Layered on top of the section-level media queries above. Keeps the layout
+   readable from 320px ultra-small phones up to 4K monitors.
+   ========================================================================== */
+
+/* Global overflow + sizing guards */
+html, body { overflow-x: clip; max-width: 100%; }
+img, video, svg { max-width: 100%; height: auto; }
+.section, .top-bar, .site-header, .hero, .marquee, .banner-cta, .site-footer { max-width: 100vw; }
+
+/* Prevent flex/grid children from forcing overflow with long words/URLs */
+.site-nav__list a,
+.service-card__text,
+.about__content p,
+.quote blockquote,
+.contact__value,
+.section__lede,
+.hero__sub {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Hover-only treatments collapse on touch devices so the styles look right
+   when tapped. Without this, :hover sticks after a tap on touchscreens. */
+@media (hover: none) {
+    .service-card:hover,
+    .gallery__item:hover,
+    .quote:hover,
+    .process__step:hover,
+    .btn--gold:hover,
+    .btn--ghost:hover {
+        transform: none;
+    }
+    .service-card:hover .service-card__media { transform: none; }
+    .gallery__overlay h4 { transform: none !important; opacity: 1 !important; }
+}
+
+/* Ultra-wide displays: cap fluid type so headings don't get cartoonishly large */
+@media (min-width: 1800px) {
+    :root { --maxw: 1600px; }
+    .hero__title { font-size: 150px; }
+    .section__title { font-size: 84px; }
+}
+
+/* Large laptops / small desktops — ease nav crowding before drawer kicks in */
+@media (max-width: 1200px) {
+    .site-nav__list { gap: 24px; }
+    .site-header__inner { gap: 20px; }
+}
+
+/* Tablet landscape — tighter section rhythm */
+@media (max-width: 1024px) {
+    :root { --header-h: 76px; }
+    .hero { padding-top: 90px; }
+    .hero__actions { gap: 12px; }
+}
+
+/* Tablet portrait — services to 2-up, testimonials to 2-up, gallery rebalance */
+@media (max-width: 880px) {
+    .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials__grid .quote:last-child { grid-column: 1 / -1; }
+    .gallery__grid { grid-auto-rows: 220px; }
+    .hero__meta { gap: 32px; padding-top: 26px; }
+    .hero__meta-num { font-size: 32px; }
+}
+
+/* Standard phone */
+@media (max-width: 640px) {
+    :root {
+        --gutter: 18px;
+        --header-h: 70px;
+    }
+    .section { padding: 70px var(--gutter); }
+    .section__head { margin-bottom: 48px; }
+    .top-bar__inner { padding: 8px var(--gutter); font-size: 10px; }
+    .hero { padding: 80px var(--gutter) 50px; min-height: calc(100svh - var(--header-h)); }
+    .hero__title { line-height: 0.95; }
+    .hero__sub { margin-bottom: 28px; }
+    .hero__actions { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 56px; }
+    .hero__actions .btn { justify-content: center; }
+    .hero__meta { gap: 20px; flex-wrap: wrap; }
+    .hero__meta-item { flex: 1 1 40%; }
+
+    .marquee { padding: 16px 0; }
+    .marquee__track { gap: 32px; font-size: 12px; }
+
+    .service-card__body { padding: 28px 22px 32px; }
+    .service-card__title { font-size: 19px; }
+    .service-card__num { font-size: 52px; right: 22px; }
+
+    .about__grid { gap: 40px; }
+    .about__media { aspect-ratio: 4/4; }
+    .about__badge { width: 96px; height: 96px; bottom: -22px; right: -8px; }
+    .about__list { padding: 18px 0; margin: 24px 0 32px; }
+
+    .gallery__grid { gap: 8px; grid-auto-rows: 180px; }
+    .gallery__overlay { padding: 20px; }
+    .gallery__overlay h4 { font-size: 16px; }
+
+    .process__step { padding: 36px 24px; }
+    .process__step h3 { font-size: 22px; }
+
+    .banner-cta__inner { gap: 26px; }
+
+    .quote { padding: 32px 26px; }
+    .quote blockquote { font-size: 15px; }
+
+    .contact__form { padding: 28px 20px; gap: 18px; }
+    .contact__details li { grid-template-columns: 80px 1fr; gap: 14px; padding: 18px 0; }
+    .contact__label { font-size: 10px; letter-spacing: 0.25em; }
+
+    .btn { padding: 14px 26px; font-size: 12px; letter-spacing: 0.2em; }
+    .btn--lg { padding: 16px 32px; font-size: 13px; }
+    .btn--sm { padding: 10px 18px; font-size: 10px; }
+
+    .site-header__cta { gap: 8px; }
+    .top-bar__item { letter-spacing: 0.15em; }
+}
+
+/* Small phones — keep footer columns readable, tighten brand */
+@media (max-width: 480px) {
+    .site-footer { padding: 60px var(--gutter) 24px; }
+    .site-footer__cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .site-footer__top { gap: 36px; padding-bottom: 40px; }
+    .site-footer__wordmark { max-width: 240px; }
+
+    .hero__meta-item { flex: 1 1 100%; }
+    .hero__meta { padding-top: 22px; }
+    .hero__title { font-size: clamp(40px, 11vw, 64px); }
+
+    .section__title { font-size: clamp(30px, 8vw, 44px); }
+    .banner-cta h2 { font-size: clamp(30px, 8.5vw, 48px); }
+
+    .top-bar__item--right a { display: inline-block; }
+    .brand__wordmark { display: none; } /* show only the pentagon to save room */
+    .nav-toggle { width: 36px; height: 36px; }
+
+    .field-row { gap: 16px; }
+}
+
+/* Ultra-small phones (320–360px) */
+@media (max-width: 360px) {
+    :root { --gutter: 14px; }
+    .section { padding: 56px var(--gutter); }
+    .top-bar__divider { display: none; }
+    .site-header__cta .btn { display: none; }
+    .preloader__logo { width: 150px; }
+    .marquee__track { font-size: 11px; gap: 24px; }
+    .service-card__body { padding: 24px 18px 28px; }
+    .gallery__grid { grid-auto-rows: 160px; }
+}
+
+/* Short viewports (landscape phones) — keep hero usable without scrolling */
+@media (max-height: 560px) and (orientation: landscape) {
+    .hero { min-height: auto; padding-top: 70px; padding-bottom: 40px; }
+    .hero__actions { margin-bottom: 30px; }
+    .hero__meta { padding-top: 18px; }
+}
+
+/* Print fallback — minimal, readable */
+@media print {
+    .preloader, .marquee, .hero__scroll, .nav-toggle, .site-header__cta, .top-bar { display: none !important; }
+    body { background: #fff; color: #000; }
+    .hero, .section, .banner-cta, .site-footer { background: #fff !important; color: #000 !important; padding: 20px 0 !important; }
+    a { color: #000; text-decoration: underline; }
+    .text-gold, .eyebrow, .hero__line--accent { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+}
+
