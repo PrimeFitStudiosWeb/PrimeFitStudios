@@ -1292,10 +1292,20 @@ img, video, svg { max-width: 100%; height: auto; }
     .banner-cta h2 { font-size: clamp(30px, 8.5vw, 48px); }
 
     .top-bar__item--right a { display: inline-block; }
-    .brand__wordmark { display: none; } /* show only the pentagon to save room */
+
+    /* Keep both brand pentagon AND wordmark visible on phones, just smaller */
+    .brand { max-height: 52px; gap: 8px; }
+    .brand__mark { width: 36px; height: 36px; max-width: 36px; max-height: 36px; }
+    .brand__wordmark { display: block; height: 32px; max-height: 32px; max-width: 110px; }
     .nav-toggle { width: 36px; height: 36px; }
 
     .field-row { gap: 16px; }
+}
+
+/* Center the footer wordmark once the footer stacks vertically */
+@media (max-width: 900px) {
+    .site-footer__brand { text-align: center; }
+    .site-footer__wordmark { margin-left: auto; margin-right: auto; }
 }
 
 /* Ultra-small phones (320–360px) */
