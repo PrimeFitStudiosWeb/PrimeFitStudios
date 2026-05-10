@@ -1,6 +1,31 @@
 (function () {
     'use strict';
 
+    // Intro / preloader sequence
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) {
+            document.body.classList.remove('is-loading');
+            document.body.classList.add('is-revealed');
+            preloader.remove();
+        } else {
+            // Total intro: 0.2s delay + 1.6s logo in + 1.0s hold + 1.2s fade out = 4.0s
+            const REVEAL_AT = 2800;   // matches start of preloader fade-out
+            const REMOVE_AT = 4050;   // just after preloader fade-out completes
+            window.setTimeout(() => {
+                document.body.classList.remove('is-loading');
+                document.body.classList.add('is-revealed');
+            }, REVEAL_AT);
+            window.setTimeout(() => {
+                if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+            }, REMOVE_AT);
+        }
+    } else {
+        document.body.classList.remove('is-loading');
+        document.body.classList.add('is-revealed');
+    }
+
     // Mobile nav
     const toggle = document.getElementById('navToggle');
     const nav = document.getElementById('siteNav');

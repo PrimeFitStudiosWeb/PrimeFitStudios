@@ -51,6 +51,68 @@ body {
 
 ::selection { background: var(--gold); color: #000; }
 
+/* PRELOADER / INTRO SEQUENCE */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    animation: preloaderOut 1.2s var(--easing) 2.8s forwards;
+}
+.preloader__logo {
+    width: clamp(180px, 22vw, 300px);
+    height: auto;
+    opacity: 0;
+    transform: scale(0.92);
+    filter: drop-shadow(0 0 40px rgba(201, 161, 74, 0.35));
+    animation: preloaderLogoIn 1.6s var(--easing) 0.2s forwards;
+}
+@keyframes preloaderLogoIn {
+    0%   { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes preloaderOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+body.is-loading {
+    overflow: hidden;
+}
+body.is-loading .top-bar,
+body.is-loading .site-header,
+body.is-loading main,
+body.is-loading .hero,
+body.is-loading .marquee,
+body.is-loading .section,
+body.is-loading .banner-cta,
+body.is-loading .site-footer {
+    opacity: 0;
+}
+body.is-revealed .top-bar,
+body.is-revealed .site-header,
+body.is-revealed .hero,
+body.is-revealed .marquee,
+body.is-revealed .section,
+body.is-revealed .banner-cta,
+body.is-revealed .site-footer {
+    animation: pageFadeIn 1.4s var(--easing) forwards;
+}
+@keyframes pageFadeIn {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .preloader { display: none; }
+    body.is-loading { overflow: auto; }
+    body.is-loading * { opacity: 1 !important; animation: none !important; }
+}
+
 h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     font-weight: 600;
